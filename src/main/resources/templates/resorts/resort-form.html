@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Add Resort</title>
+</head>
+<body style="background-color: #6e924c ;">
+<div class="container">
+    <hr>
+    <h3>Add Resort</h3>
+    <hr>
+    <form action="#" th:action="@{/resorts/save}" th:object="${resort}" method="POST" >
+
+        <!--This field is very important for updating in tables-->
+        <input type="hidden" th:field="*{resortId}"/>
+        <div>
+            <input type="text" th:field="*{resortName}" id="resortName" class="form-control mb-4 col-4"  placeholder="Resort Name"/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('resortName')}" th:errors="*{resortName}"></div>
+
+        </div>
+        <div>
+            <input type="text" th:field="*{resortAddress}" id="resortAddress" class="form-control mb-4 col-4" placeholder="Resort Address"/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('resortAddress')}" th:errors="*{resortAddress}"></div>
+
+        </div>
+        <div>
+            <input type="text" th:field="*{resortRating}" id="resortRating" class="form-control mb-4 col-4" placeholder="Resort Rating"/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('resortRating')}" th:errors="*{resortRating}"></div>
+
+        </div>
+        <button type="submit" class="btn btn-info col-2">Save Resort</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/resorts/showAll}" class="btn btn-danger btn-sm">Back to Resort</a>
+
+</div>
+</body>
+</html>

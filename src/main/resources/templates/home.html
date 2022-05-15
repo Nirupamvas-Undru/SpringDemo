@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Home Page</title>
+</head>
+<body style="background-color: #c5d5cb; text-align:center;padding-top:200px">
+<hr>
+<h1>Welcome to Resorts Viewer</h1>
+<hr>
+<a th:href="@{/resorts/showAll}" class="btn btn-primary"> Admins</a>
+<a th:href="@{/resorts/viewResorts}" class="btn btn-primary"> Users</a>
+</body>
+</html>

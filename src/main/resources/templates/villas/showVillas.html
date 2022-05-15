@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Villas List</title>
+</head>
+<body style="background-color: #6e924c">
+<div class="container">
+    <hr>
+    <h3>Villas List</h3>
+    <hr>
+    <span sec:authorize="hasRole('MANAGER')">
+<a th:href="@{/villas/showFormForAdd/{Id}(Id=${resortId})}" class="btn btn-primary btn-sm mb-3"> Add Villas </a>
+        <hr>
+    </span>
+    <table class="table table-bordered table-striped" > <!-- This is start of table tag -->
+        <thead class="thead-dark">
+        <th>Villa No </th>
+        <th> Street No </th>
+        <span sec:authorize="hasRole('MANAGER')">
+           <th style="text-align:center">Action</th>
+        </span>
+        </thead>
+        <tbody style="background-color: #c4bab9">
+        <tr th:each="theVilla: ${resortVillas}">
+            <td th:text="${theVilla.villaNo}"/>
+            <td th:text="${theVilla.streetNo}"/>
+            <span sec:authorize="hasRole('MANAGER')">
+           <td style="text-align:center">
+               <a th:href="@{/villas/showFormForUpdate(villaId=${theVilla.villaId},resortId=${resortId})}" class="btn btn-info btn-sm">Update</a>&nbsp;
+               <a th:href="@{/villas/deleteById(villaId=${theVilla.villaId},resortId=${resortId})}" class="btn btn-danger btn-sm"
+                  onclick="if(!(confirm('Are you sure you wanna delete this villa?'))) return false">Delete</a>
+           </td></span>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+    <span th:unless="${#authorization.expression('hasRole(''MANAGER'')')}">
+        <a th:href="@{/resorts/viewResorts  }" class="btn btn-danger btn-sm">Go Back to Resorts</a>
+    </span>
+    <span th:if="${#authorization.expression('hasRole(''MANAGER'')')}">
+        <a th:href="@{/resorts/showAll  }" class="btn btn-danger btn-sm">Go Back to Resorts</a>
+    </span>
+</div>
+</body>
+</html>

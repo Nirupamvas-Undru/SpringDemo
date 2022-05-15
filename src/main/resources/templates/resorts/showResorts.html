@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Resort List</title>
+</head>
+<body style="background-color:#6e924c">
+<div class="container">
+    <br>
+    <hr style="  visibility: hidden;">
+    <span sec:authorize="hasRole('MANAGER')">
+        <h1 style="text-align: center">Welcome Admin</h1></span>
+
+    <hr style="  visibility: hidden;">
+    <h3>Resorts List</h3>
+    <hr style="  visibility: hidden;">
+
+    <div sec:authorize="hasRole('MANAGER')">
+        <a th:href="@{/resorts/showFormForAdd}"
+           class="btn btn-primary btn-sm mb-3">
+            Add Resort
+        </a>
+    </div>
+
+
+    <table class="table table-bordered table-striped"  > <!-- This is start of table tag -->
+        <thead class="thead-dark">
+        <th>Resort Name</th>
+        <th>Resort Address</th>
+        <th>Rating</th>
+        <th style="text-align:center">View Details</th>
+        <span sec:authorize="hasRole('MANAGER')">
+            <th style="text-align:center">Action</th></span>
+        </thead>
+        <tbody style="background-color:#c4bab9">
+        <tr th:each="theResort: ${resorts}">
+            <td th:text="${theResort.resortName}"/>
+            <td th:text="${theResort.resortAddress}"/>
+            <td th:text="${theResort.resortRating}"/>
+            <span th:unless="${#authorization.expression('hasRole(''MANAGER'')')}"><td style="text-align:center">
+                <a th:href="@{/villas/viewVillas(resortId=${theResort.resortId})}" class="btn btn-info btn-sm">View Villas</a>
+            </td></span>
+            <span sec:authorize="hasRole('MANAGER')">
+            <td style="text-align:center">
+                <a th:href="@{/villas/findVillas(resortId=${theResort.resortId})}" class="btn btn-info btn-sm">View Villas</a>&nbsp;
+                    <a th:href="@{/customers/findCustomers(resortId=${theResort.resortId})}" class="btn btn-info btn-sm">View Customers</a>
+            </td> </span>
+            <span sec:authorize="hasRole('MANAGER')">
+            <td style="text-align:center"> <a th:href="@{/resorts/showFormForUpdate(resortId=${theResort.resortId})}" class="btn btn-info btn-sm"> Update</a>&nbsp;
+                <a th:href="@{/resorts/deleteById(resortId=${theResort.resortId})}" class="btn btn-danger btn-sm"
+                   onclick="if(!(confirm('Are you sure you wanna delete the resort?'))) return false">Delete</a>
+            </td></span>
+        </tr>
+        </tbody>
+
+    </table>
+
+    <hr>
+    <span th:unless="${#authorization.expression('hasRole(''MANAGER'')')}">
+        <a th:href="@{/}"  class="btn btn-danger btn-sm"> Back to home</a>
+    </span>
+    <span th:if="${#authorization.expression('hasRole(''MANAGER'')')}">
+        <a th:href="@{/logout}"  class="btn btn-danger btn-sm"> LOGOUT</a>
+    </span>
+
+</div>
+</body>
+</html>
