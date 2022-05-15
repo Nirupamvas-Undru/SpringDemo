@@ -2,18 +2,15 @@ package com.springboot.resortmanagement.controller;
 
 
 import com.springboot.resortmanagement.dto.CustomerDto;
-import com.springboot.resortmanagement.dto.ResortDto;
 import com.springboot.resortmanagement.entity.Customer;
 import com.springboot.resortmanagement.entity.Resort;
 import com.springboot.resortmanagement.exception.ResortNotFoundException;
 import com.springboot.resortmanagement.service.CustomerService;
 import com.springboot.resortmanagement.service.ResortService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
