@@ -5,13 +5,13 @@ import lombok.Data;
 @Data
 public class CustomerDto {
 
-    public String customerId;
+    private String customerId;
 
-    public String firstName;
+    private String firstName;
 
-    public String lastName;
+    private String lastName;
 
-    public String email;
+    private String email;
 
-    public String resortResortId;
+    private String resortResortId;
 }
