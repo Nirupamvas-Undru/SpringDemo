@@ -31,7 +31,7 @@ public class CustomerController {
     private ResortService resortService;
 
     String customerForm = "customers/customer-form";
-
+    String resortId = "resortId";
 
     @GetMapping("/showAll")
     public String findALl(Model theModel){
@@ -46,7 +46,7 @@ public class CustomerController {
     public String addCustomer(Model theModel, @PathVariable("Id") int theId){
         Customer theCustomer = new Customer();
         theModel.addAttribute("customer", theCustomer);
-        theModel.addAttribute("resortId",theId);
+        theModel.addAttribute(resortId,theId);
         return customerForm;
     }
 
@@ -65,10 +65,11 @@ public class CustomerController {
     }
 
     @GetMapping("/showFormForUpdate")
-    public String updateCustomer(@RequestParam("customerId") int theId,@RequestParam("resortId") int resortId, Model theModel){
+    public String updateCustomer(@RequestParam("customerId") int theId,@RequestParam(
+        ") int resortId, Model theModel){
         Customer theCustomer= customerService.findById(theId);
         theModel.addAttribute(theCustomer);
-        theModel.addAttribute("resortId",resortId);
+        theModel.addAttribute(resortId,resortId);
         return customerForm;
     }
 
@@ -82,12 +83,12 @@ public class CustomerController {
     public String findCustomers(@RequestParam("resortId") int theId, Model theModel){
         List<Customer> customers= customerService.findCustomers(theId);
 
-        if(customers.size()==0){
+        if(customers.isEmpty()){
             throw new ResortNotFoundException("Resort id not found - " + theId);
         }
 
         theModel.addAttribute("resortCustomers",customers);
-        theModel.addAttribute("resortId",theId);
+        theModel.addAttribute(resortId,theId);
         return "customers/showCustomers";
     }
 
