@@ -5,12 +5,12 @@ import lombok.Data;
 @Data
 public class VillaDto {
 
-    public String villaId;
+    private String villaId;
 
-    public String streetNo;
+    private String streetNo;
 
-    public String villaNo;
+    private String villaNo;
 
-    public String resortResortId;
+    private String resortResortId;
 
 }
